@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 pageEncoding="ISO-8859-1"%>
 <%@ page import="java.sql.*" %> 
-<html>
+<!DOCTYPE html>
+<html lang="es">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Login</title>
@@ -67,7 +68,7 @@ out.println(sqe);
 else
 {
 %>
-<center><p style="color:red">Missing fields, Please try again.</p></center>
+<p style="color:red">Missing fields, Please try again.</p>
 <% 
 getServletContext().getRequestDispatcher("/index.jsp").include(request, response);
 }
