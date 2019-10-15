@@ -3,7 +3,7 @@
 <%@ page import="java.io.*" %> 
 
 
-<html>
+<html lang="es">
 <head>
 <title>Profile Information</title>
 <meta charset="utf-8">
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
 </head>
 <body>
-<center>
+
 <h1>Profile Information</h1>
 <%
 try {
@@ -49,7 +49,7 @@ rs = ps.executeQuery();
 <%
 while (rs.next()) {
 %>
-<TR><TD bgcolor = "#ffcc5c">Student Roll Number </TD><TD><%=rs.getString("s_no")%></TD></TR>
+<TR><TH scope="col"><TD bgcolor = "#ffcc5c">Student Roll Number </TD><TD><%=rs.getString("s_no")%></TD></TH></TR>
 <TR><TD bgcolor = "#ffcc5c">Student Name </TD><TD><%=rs.getString("s_name")%></TD></TR>
 <TR><TD bgcolor = "#ffcc5c">Gender </TD><TD><%=rs.getString("gender")%></TD></TR>
 <TR><TD bgcolor = "#ffcc5c">HomeTown </TD><TD><%=rs.getString("city")%>, <%=rs.getString("state")%></TD></TR>
@@ -62,7 +62,7 @@ statement.close();
 connection.close();
 } catch (Exception ex) {
 %>
-<font size="+3" color="red"></b>
+<color="red"></b>
 <%
 out.println("No books added.");
 }
@@ -71,7 +71,7 @@ out.println("No books added.");
 </TABLE>
 <p class="lead mb-5"><span>Click  &nbsp;</span><a href="/sams3/student_home.jsp">here</a> to go back.</p>
 <br>
-</center>
+
 </body>
 </html>
 
