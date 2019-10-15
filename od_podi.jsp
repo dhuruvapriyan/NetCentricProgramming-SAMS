@@ -1,8 +1,11 @@
+<!DOCTYPE html>
 <%@page language="java"%>
 <%@page import="java.sql.*"%>
-<html><body>
-<center>
-<table border="1" align = center style = "width:100%;border-style = solid;" >
+<html lang="es">
+<title>OD</title>
+<body>
+
+<table summary="Od" border="1" align = center style = "width:100%;border-style = solid;" >
 <%
 String id = request.getParameter("id"); 
 try 
@@ -20,7 +23,7 @@ ps.execute();
 }
 catch(Exception e){
 %>
-<font size="+3" color="red"></b>
+<color="red"></b>
 <%
 out.println("Unable to connect to database.");
 }
