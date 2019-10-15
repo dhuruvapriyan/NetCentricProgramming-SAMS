@@ -3,7 +3,7 @@
 <%@ page import="java.io.*" %> 
 
 
-<html>
+<html lang="es">
 <head>
 <title>Your Courses</title>
 <meta charset="utf-8">
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
 </head>
 <body>
-<center>
+
 <h1>Your Courses</h1>
 <%
 try {
@@ -44,7 +44,7 @@ rs = ps.executeQuery();
                     
                     <div class="table-responsive">
                         <table class="table">
-<TR bgcolor = "#ffcc5c"><TH>Course Code</TH><TH>Course Name</TH><TH>Teacher</TH></TR>
+<TR bgcolor = "#ffcc5c"><TH scope="col">Course Code</TH><TH scope="col">Course Name</TH><TH scope="col">Teacher</TH></TR>
 <%
 while (rs.next()) 
 {
@@ -70,7 +70,7 @@ rs.close();
 connection.close();
 } catch (Exception ex) {
 %>
-<font size="+3" color="red"></b>
+<color="red"></b>
 <%
 out.println("No books added.");
 }
@@ -84,7 +84,6 @@ out.println("No books added.");
 <br>
 
 </form>
-</center>
 </body>
 </html>
 
