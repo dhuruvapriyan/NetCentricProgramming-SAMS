@@ -3,7 +3,7 @@
 <%@ page import="java.io.*" %> 
 
 
-<html>
+<html lang="es">
 <head>
 <title>Course Report</title>
 <meta charset="utf-8">
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
 </head>
 <body>
-<center>
+
 <h1>Course Attendance Report</h1>
 <%
 try {
@@ -59,7 +59,7 @@ while(rs2.next())
                     
                     <div class="table-responsive">
                         <table class="table">
-<TR bgcolor = "#ffcc5c"><TH>Date</TH><TH>From</TH><TH>To</TH><TH>Attendance</TH><TH>Issues</TH><TR>
+<TR bgcolor = "#ffcc5c"><TH scope="col">Date</TH><TH scope="col">From</TH><TH scope="col">To</TH><TH scope="col">Attendance</TH><TH scope="col">Issues</TH><TR>
 <%
 while (rs.next()) {
 %>
@@ -78,7 +78,7 @@ statement.close();
 connection.close();
 } catch (Exception ex) {
 %>
-<font size="+3" color="red"></b>
+<color="red"></b>
 <%
 out.println("No books added.");
 }
@@ -87,7 +87,7 @@ out.println("No books added.");
 </TABLE>
 <p class="lead mb-5"><span>Click  &nbsp;</span><a href="/sams3/my_attendance.jsp">here</a> to go back.</p>
 <br>
-</center>
+
 </body>
 </html>
 
