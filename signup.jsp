@@ -69,8 +69,10 @@ if(Countrow.equals("1"))
 				System.out.println("Error SMS "+e);
 			}
 %>
-<html>
+<!DOCTYPE html>
+<html lang="es">
 <head>
+	<title>all1</title>
 <script LANGUAGE='JavaScript'>
      window.alert('Account created successfully, Check your phone for password');
      window.location.href='index.jsp';
@@ -101,8 +103,10 @@ else
 else
 {
 %>
-<html>
+<!DOCTYPE html>
+<html lang="es">
 <head>
+	<title>all</title>
 <script LANGUAGE='JavaScript'>
      window.alert('Account creation failed!!! please try again.');
      window.location.href='index.jsp';
