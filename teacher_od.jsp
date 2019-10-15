@@ -2,7 +2,7 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="java.io.*" %>
 
-<html>
+<html lang="es">
 <head>
 <title>OD List</title>
 <meta charset="utf-8">
@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
 </head>
 <body>
-<center>
+
 <h1>OD List</h1>
 <%
 try {
@@ -47,7 +47,7 @@ rs = ps.executeQuery();
                     
                     <div class="table-responsive">
                         <table class="table">
-<TR bgcolor = "#ffcc5c"><TH>Student ID</TH><TH>Student Name</TH><TH>Class</TH><TH>Course</TH><TH>Date</TH><TH>From Period</TH><TH>To Period</TH><TH>Reason</TH><TH>Document Proof</TH><TH>Approve</TH><TH>Disapprove</TH><TR>
+<TR bgcolor = "#ffcc5c"><TH scope="col">Student ID</TH><TH scope="col">Student Name</TH><TH scope="col">Class</TH><TH scope="col">Course</TH><TH scope="col"scope="col">Date</TH><TH scope="col">From Period</TH><TH scope="col">To Period</TH><TH scope="col">Reason</TH><TH scope="col">Document Proof</TH><TH scope="col">Approve</TH><TH scope="col">Disapprove</TH><TR>
 <%
 while (rs.next()) {
 	String q2 = "SELECT s_name from student_details where s_no = ?";
@@ -81,7 +81,7 @@ statement.close();
 connection.close();
 } catch (Exception ex) {
 %>
-<font size="+3" color="red"></b>
+<color="red"></b>
 <%
 out.println("Unable to connect to Database.");
 }
@@ -94,7 +94,7 @@ out.println("Unable to connect to Database.");
 <br/>
 <br/>
 <p class="lead mb-5"><span>Click  &nbsp;</span><a href="/sams3/teacher_home.jsp">here</a> to go back.</p>
-</center>
+
 </body>
 </html>
 
