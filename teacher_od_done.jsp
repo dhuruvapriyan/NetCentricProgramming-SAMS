@@ -2,7 +2,8 @@
 <%@page import="java.sql.*"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page import="java.util.Date,java.io.*,java.util.Enumeration"%>
-<html>
+<!DOCTYPE html>
+<html lang="es">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -13,7 +14,7 @@
     <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
 <title>Confirmation</title>
 </head><body>
-<center>
+
 <%
 String[] attendees = request.getParameterValues("odees"); 
 
@@ -90,6 +91,6 @@ try
      window.location.href='/sams3/teacher_home.jsp';
     </script>
 </form>
-</center>
+
 </body>
 </html>
