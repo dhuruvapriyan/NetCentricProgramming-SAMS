@@ -2,7 +2,7 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="java.io.*" %>
 
-<html>
+<html lang="es">
 <head>
 <title>Course List</title>
 <meta charset="utf-8">
@@ -73,7 +73,7 @@ $(function(){
 
 </head>
 <body>
-<center>
+
 <h1>Course List</h1>
 <%
 try {
@@ -108,14 +108,14 @@ rs = ps.executeQuery();
                 <div class="col-lg-13 mx-auto">
                     
                     <div class="table-responsive">
-                        <table class="table">
+                        <table class="table">  <!-- Noncompliant -->
 
 <tr><td> Date </td><td><input type = "text" id="datepicker" name = "attendance_date" Required/></td></tr>
 <tr><td> From </td><td><input type = "number" name = "from" pattern = "\d+" value = "1" step = "1" min = "1" max = "8"/></td>
 <tr><td> To </td><td><input type = "number" name = "to" pattern = "\d+" value = "1" step = "1" min = "1" max = "8"/></td>
 <tr><td> Enter Roll numbers here</td><td><textarea rows = "5" columns = "300" name = "atlist"></textarea><tr>
 
-<TR bgcolor = "#ffcc5c"><TH>Roll Number</TH><TH>Student Name</TH><TH>Attendance <br/>
+<TR bgcolor = "#ffcc5c"><TH scope="col">Roll Number</TH><TH scope="col">Student Name</TH><TH scope="col">Attendance <br/>
 <input class="btn btn-light btn-x4 js-scroll-trigger" type="button" onclick='selectAll()' value="P"/>
 		<input class="btn btn-light btn-x4 js-scroll-trigger" type="button" onclick='UnSelectAll()' value="A"/> </TH></TR>
 <%
@@ -133,7 +133,7 @@ statement.close();
 connection.close();
 } catch (Exception ex) {
 %>
-<font size="+3" color="red"></b>
+<color="red"></b>
 <%
 out.println("Unable to connect to Database.");
 }
@@ -147,7 +147,6 @@ out.println("Unable to connect to Database.");
 <br/>
 
 <p class="lead mb-5"><span>Click  &nbsp;</span><a href="/sams3/my_classes.jsp">here</a> to go back.</p>
-</center>
 </body>
 </html>
 
