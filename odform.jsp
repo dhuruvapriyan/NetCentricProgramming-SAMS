@@ -1,3 +1,4 @@
+
 <%@page language="java"%>
 <%@page import="java.sql.*"%>
 <%@page import="java.io.BufferedReader"%>
@@ -49,8 +50,10 @@ ps.close();
 
 
 %>
-<html>
+<!DOCTYPE html>
+<html lang="es">
 <head>
+	<title>Hi1</title>
 <%
 if(reason.equals("In_Class"))
 {
@@ -85,8 +88,10 @@ out.println(sqe);
 else
 {
 %>
-<html>
+<! DOCTYPE html>
+<html lang="es">
 <head>
+	<title>Hi</title>
 <script LANGUAGE='JavaScript'>
      window.alert('Account creation failed!!! please try again.');
      window.location.href='index.jsp';
