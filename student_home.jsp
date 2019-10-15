@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 pageEncoding="ISO-8859-1"%>
 <%@ page import="java.sql.*" %> 
-
+<% if(session.getAttribute("s_no")==null)
+	{response.sendRedirect("index.jsp");}
+%>
 <html>
 
 <head>
@@ -27,11 +29,12 @@ pageEncoding="ISO-8859-1"%>
         <div class="container"><button data-toggle="collapse" class="navbar-toggler d-none" data-target="#"></button>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav sidebar-nav" id="sidebar-nav">
-                    <li class="nav-item sidebar-brand" role="presentation"><a class="nav-link active js-scroll-trigger" href="#page-top">Brand</a></li>
+                    <li class="nav-item sidebar-brand" role="presentation"><a class="nav-link active js-scroll-trigger" href="#page-top">SAMS</a></li>
                     <li class="nav-item sidebar-nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="#page-top">Home</a></li>
+					<li class="nav-item sidebar-nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="profile.jsp">View Profile</a></li>
                     <li class="nav-item sidebar-nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="#about">Attendance</a></li>
                     <li class="nav-item sidebar-nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="#services">OD/Leave</a></li>
-					<li class="nav-item sidebar-nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="logout.php">Logout</a></li>
+					<li class="nav-item sidebar-nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="logout.jsp">Logout</a></li>
                    
                 </ul>
             </div>
@@ -43,23 +46,26 @@ pageEncoding="ISO-8859-1"%>
 		
             
 				<%
-String id=(String)session.getAttribute("user");
-
+String id=(String)session.getAttribute("s_no");
+%>
+<%@include file="connection.jsp"%>
+<%
 Class.forName("com.mysql.jdbc.Driver");
-Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sams", "root", "");
+Connection conn = DriverManager.getConnection(url, dbusername,dbpassword);
 String query = "select * from student_details where s_no=?;";
 PreparedStatement ps = conn.prepareStatement(query);
 ps.setString(1, id);
-
 ResultSet rs = ps.executeQuery();
 
 while(rs.next())
 {
+	session.setAttribute("class",rs.getString("class"));
 %>
-			<h1 class="display-1 text-primary mb-1">Hi <%=rs.getString("name")%>
+			<h1 class="display-1 text-primary mb-1">Hi, <%=rs.getString("s_name")%>
 			</h1>
 <%}%>
-            <h3 class="mb-5"></h3><a class="btn btn-primary btn-xl js-scroll-trigger" role="button" href="#about">Find Out More</a>
+            <h3 class="mb-5"></h3><a class="btn btn-primary btn-xl js-scroll-trigger" role="button" href="#about">Attendance</a>
+            <h3 class="mb-5"></h3><a class="btn btn-primary btn-xl js-scroll-trigger" role="button" href="#services">Apply OD</a>
             <div class="overlay"></div>
 			
         </div>
@@ -78,39 +84,57 @@ while(rs.next())
 			<div class="container">
 				<div class="row">
 					<div class="col">
-						<div class="elements_title">Loaders</div>
+						
 					</div>
 				</div>
-
+<h2>Attendance Status</h2><br>
 				<div class="row elements_loaders_container">
+				<% 
+				String query2 = "select course_registration.c_no,course.c_name,course_registration.classes_attended,course_registration.total_classes from course_registration join course on course_registration.c_no = course.c_no and course_registration.s_no=?;";
+				PreparedStatement ps2 = conn.prepareStatement(query2);
+				ps2.setString(1, id);
+				ResultSet rs2 = ps2.executeQuery();
+				while(rs2.next())
+				{
+					String c_no = rs2.getString("course_registration.c_no");
+					int classes_attended = rs2.getInt("course_registration.classes_attended");
+					int total_classes = rs2.getInt("course_registration.total_classes");
+					System.out.println(classes_attended);
+					System.out.println(total_classes);
+					
+					if(total_classes > 0)
+					{
+					double percentage = (double)classes_attended/total_classes;
+					System.out.println(percentage);
+				%>
+				
 					<div class="col-lg-3 loader_col">
 						<!-- Loader -->
-						<div class="loader" data-perc="0.75"></div>
-						<div class="loader_text text-center">Photos Taken</div>
-						<div class="loader_sub text-center">Etiam nec odio vestibulum est.</div>
+						<div class="loader" data-perc="<%=percentage%>"></div>
+						<div class="loader_sub text-center"> <b><%=c_no%></b><br><%=rs2.getString("course.c_name")%> </div>
 					</div>
+					
+					<% 
+					}
+					else
+					{
+					%>
 					<div class="col-lg-3 loader_col">
 						<!-- Loader -->
-						<div class="loader" data-perc="0.83"></div>
-						<div class="loader_text text-center">Km Walked</div>
-						<div class="loader_sub text-center">Odio vestibulum est mattis.</div>
-						<span></span>
+						<div class="loader" data-perc="1.0"></div>
+						<div class="loader_sub text-center"> <b><%=c_no%></b><br><%=rs2.getString("course.c_name")%> </div>
 					</div>
-					<div class="col-lg-3 loader_col">
-						<!-- Loader -->
-						<div class="loader" data-perc="0.25"></div>
-						<div class="loader_text text-center">Cities Visited</div>
-						<div class="loader_sub text-center">Vestibulum est mattis effic.</div>
-					</div>
-					<div class="col-lg-3 loader_col">
-						<!-- Loader -->
-						<div class="loader" data-perc="0.95"></div>
-						<div class="loader_text text-center">Cities Visited</div>
-						<div class="loader_sub text-center">Vestibulum est mattis effic.</div>
-					</div>
-				</div>
+					<%
+					}
+					
+					} %>
 
-			</div>
+				</div>
+				<center>
+				<h3 class="mb-5"></h3><a class="btn btn-primary btn-xl js-scroll-trigger" role="button" href="my_attendance.jsp">View Detailed Report</a>
+            </center>
+</div>
+			
 		</div>
 		
 		
@@ -118,7 +142,6 @@ while(rs.next())
 		
 
 </div>
-
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="styles/bootstrap4/popper.js"></script>
 <script src="styles/bootstrap4/bootstrap.min.js"></script>
@@ -141,13 +164,34 @@ while(rs.next())
             <div class="row">
                 <div class="col">
                     <form class="bootstrap-form-with-validation" action="odform.jsp">
-							<input class="form-control" type="date" style="width: 439px;" name="date">
-							<input class="form-control" type="number" id="from_class" name="from_class" style="width: 440px;" placeholder="Enter starting period">
-							<input class="form-control" type="number" id="to_class" name="to_class" style="width: 440px;" placeholder="Enter period till">
-							<input class="form-control" type="text" id="c_no" name="c_no" style="width: 440px;" placeholder="Enter course code">
-							<input class="form-control" type="text" id="reason" name="reason" style="width: 440px;" placeholder="Reason">
-							<input class="form-control" type="text" id="link" name="link" style="width: 440px;" placeholder="link">
-							<button class="btn btn-primary" type="submit" style="width: 137px;height: 42px;margin: 25px;">Apply OD</button>
+							<input class="form-control" type="date" style="width: 439px;margin: 25px;" name="date" Required>
+							<input class="form-control" type="number" id="from_class" name="from_class" style="width: 440px;margin: 25px;" placeholder="Enter starting period" Required>
+							<input class="form-control" type="number" id="to_class" name="to_class" style="width: 440px;margin: 25px;" placeholder="Enter period till" Required>
+							<% 
+							rs = ps.executeQuery();
+							while(rs.next())
+							{
+							String query3 = "select course_registration.c_no,course.c_name from course_registration join course on course_registration.c_no = course.c_no where s_no=?;";
+							PreparedStatement ps3 = conn.prepareStatement(query3);
+							ps3.setString(1, id);
+							ResultSet rs3 = ps3.executeQuery();
+							%>
+							<select class="form-control" name = "c_no" style="width: 440px;margin: 25px;" placeholder="Course Code" Required>
+										<option value="" disabled selected>Course Code</option>
+							<%
+							while(rs3.next())
+							{
+							%>
+							  <option value="<%=rs3.getString("course_registration.c_no")%>"><%=rs3.getString("course_registration.c_no")%> (<%=rs3.getString("course.c_name")%>)</option>
+							  <%}
+							%>
+							</select>
+							<%}%>
+							
+								
+							<input class="form-control" type="text" id="reason" name="reason" style="width: 440px;margin: 25px;" placeholder="Reason" Required>
+							<input class="form-control" type="text" id="link" name="link" style="width: 440px;margin: 25px;" placeholder="link" Required>
+							<button class="btn btn-primary" type="submit" style="width: 440px;">Apply OD</button>
 								
                     </form>
                 </div>
@@ -156,7 +200,7 @@ while(rs.next())
     </section>
     <footer class="footer text-center">
         <div class="container">
-            <ul class="list-inline mb-5">
+            <ul class="list-inline mb-3">
                 <li class="list-inline-item">&nbsp;<a class="text-white social-link rounded-circle" href="#"><i class="icon-social-facebook"></i></a></li>
                 <li class="list-inline-item">&nbsp;<a class="text-white social-link rounded-circle" href="#"><i class="icon-social-twitter"></i></a></li>
                 <li class="list-inline-item">&nbsp;<a class="text-white social-link rounded-circle" href="#"><i class="icon-social-github"></i></a></li>

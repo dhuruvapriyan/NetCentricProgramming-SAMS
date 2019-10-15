@@ -13,13 +13,16 @@ PreparedStatement ps = null;
 ResultSet rs = null;
 
 String driverName = "com.mysql.jdbc.Driver";
-String url = "jdbc:mysql://localhost:3306/sams";
+%>
+<%@include file="connection.jsp"%>
+<%
 String user = "root";
 String dbpsw = "";
 
-String sql = "INSERT INTO od_form (s_no,c_no,date,from_class,to_class,reason,link) VALUES (?,?,?,?,?,?,?);";
+String sql = "INSERT INTO od_form (s_no,class,c_no,date,from_class,to_class,reason,link) VALUES (?,?,?,?,?,?,?,?);";
 
 String s_no=(String)session.getAttribute("user");
+String classe = (String)session.getAttribute("class");
 String c_no = request.getParameter("c_no");
 String dated = request.getParameter("date");
 String from_class = request.getParameter("from_class");
@@ -30,30 +33,48 @@ if(true)
 {
 try{
 Class.forName(driverName);
-con = DriverManager.getConnection(url, user, dbpsw);
+con = DriverManager.getConnection(url, dbusername,dbpassword);
 ps = con.prepareStatement(sql);
 ps.setString(1,s_no);
-ps.setString(2,c_no);
-ps.setString(3,dated);
-ps.setString(4,from_class);
-ps.setString(5,to_class);
-ps.setString(6,reason);
-ps.setString(7,link);
+ps.setString(2,classe);
+ps.setString(3,c_no);
+ps.setString(4,dated);
+ps.setString(5,from_class);
+ps.setString(6,to_class);
+ps.setString(7,reason);
+ps.setString(8,link);
 System.out.println(ps);
 ps.execute();
 ps.close(); 
+
+
 %>
 <html>
 <head>
+<%
+if(reason.equals("In_Class"))
+{
+%>
+
 <script LANGUAGE='JavaScript'>
-     window.alert('Your OD form has been recorded. Thank you');
+     window.alert('Your dispute has been recorded. Thank you');
      window.location.href='student_home.jsp';
     </script>
 	</head>
 	</html>
 <%
+}
+else
+{
+%>
+<script LANGUAGE='JavaScript'>
+     window.alert('Your OD form has been recorded. Thank you');
+     window.location.href='student_home.jsp';
+    </script>
+<%
 
 
+}
 }
 catch(SQLException sqe)
 {

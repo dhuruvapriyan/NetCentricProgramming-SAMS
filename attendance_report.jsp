@@ -5,7 +5,7 @@
 
 <html>
 <head>
-<title>Class List</title>
+<title>Course Report</title>
 <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Home - Brand</title>
@@ -16,18 +16,19 @@
 </head>
 <body>
 <center>
-<h1>Class List</h1>
+<h1>Course Attendance Report</h1>
 <%
 try {
 
 %>
 <%@include file="connection.jsp"%>
 <%
-
+String s_no = (String)session.getAttribute("s_no");
+String c_no = (String)request.getParameter("c_no");
 Connection connection = null;
 
 Statement statement = null;
-PreparedStatement ps = null;
+
 ResultSet rs = null;
 
 Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -35,11 +36,22 @@ Class.forName("com.mysql.jdbc.Driver").newInstance();
 connection = DriverManager.getConnection(url, dbusername,dbpassword);
 
 statement = connection.createStatement();
-String t_no = (String)session.getAttribute("t_no");
-String QueryString = "SELECT * from class_teacher join course on class_teacher.c_no = course.c_no and t_no = ?;";
-ps = connection.prepareStatement(QueryString);
-ps.setString(1,t_no);
+String QueryString = "SELECT * from attendance where s_no = ? and c_no = ? order by date asc;";
+PreparedStatement ps = connection.prepareStatement(QueryString);
+ps.setString(1,s_no);
+ps.setString(2,c_no);
 rs = ps.executeQuery();
+
+String QueryString2 = "SELECT c_name from course where c_no = ?;";
+PreparedStatement ps2 = connection.prepareStatement(QueryString2);
+ps2.setString(1,c_no);
+ResultSet rs2 = ps2.executeQuery();
+while(rs2.next())
+{
+%>
+<h3><%=rs2.getString("c_name")%></h3>
+<%
+}
 %>
  <div class="container text-center">
             <div class="row">
@@ -47,23 +59,24 @@ rs = ps.executeQuery();
                     
                     <div class="table-responsive">
                         <table class="table">
-<TR bgcolor = "#ffcc5c"><TH>Course Code</TH><TH>Course Name</TH><TH>Class</TH><TH>Attendance</TH><TR>
+<TR bgcolor = "#ffcc5c"><TH>Date</TH><TH>From</TH><TH>To</TH><TH>Attendance</TH><TH>Issues</TH><TR>
 <%
-while(rs.next()) {
+while (rs.next()) {
 %>
 <TR>
-<TD><%=rs.getString("course.c_no")%></TD>
-<TD><%=rs.getString("course.c_name")%></TD>
-<TD><%=rs.getString("class_teacher.class")%></TD>
-<td><a class="btn btn-light btn-x3 js-scroll-trigger" role="button" href = "mark_attendance.jsp?courses=<%=rs.getString("course.c_no")%>&classes=<%=rs.getString("class_teacher.class")%>">Mark Attendance</a></td>
-</TR>
-<% } %>
+<TD><%=rs.getDate("date")%></TD><td><%=rs.getInt("from_class")%></td><td><%=rs.getInt("to_class")%><td><%=rs.getInt("attendance")%></td>
+<%
+if(rs.getInt("attendance") < 1)
+{
+%>
+<td><a href = "odform.jsp?user=<%=s_no%>&c_no=<%=c_no%>&date=<%=rs.getDate("date")%>&from_class=<%=rs.getInt("from_class")%>&to_class=<%=rs.getInt("to_class")%>&reason=In_Class&link=-">Raise dispute</a></td>
+
+<% }%> </TR> <% } %>
 <%
 rs.close();
 statement.close();
 connection.close();
 } catch (Exception ex) {
-	out.println(ex);
 %>
 <font size="+3" color="red"></b>
 <%
@@ -72,10 +85,8 @@ out.println("No books added.");
 %>
 </font>
 </TABLE>
-
-
-
-<p class="lead mb-5"><span>Click  &nbsp;</span><a href="/sams3/teacher_home.jsp">here</a> to go back.</p>
+<p class="lead mb-5"><span>Click  &nbsp;</span><a href="/sams3/my_attendance.jsp">here</a> to go back.</p>
+<br>
 </center>
 </body>
 </html>

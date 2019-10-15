@@ -49,8 +49,8 @@ pageEncoding="ISO-8859-1"%>
                             <div class="tab-pane" role="tabpanel" id="tab-1">
                                 <form class="bootstrap-form-with-validation" action="student_login.jsp">
                                     <h2 class="text-center" style="width: 573px;height: 44px;padding: 8px;">Student Login</h2>
-                                    <div class="form-group"><input class="form-control" type="text" id="roll_no" name="roll_no" style="width: 550px;" placeholder="Enter your Roll Number"></div>
-                                    <div class="form-group"><input class="form-control" type="password" id="password" name="password" style="width: 550px;" placeholder="Enter your password"></div>
+                                    <div class="form-group"><input class="form-control" type="text" id="roll_no" name="roll_no" style="width: 550px;" placeholder="Enter your Roll Number" Required></div>
+                                    <div class="form-group"><input class="form-control" type="password" id="password" name="password" style="width: 550px;" placeholder="Enter your password" Required></div>
                                     
                                     <div class="form-group" style="width: 564px;"><a class="btn btn-primary" role="button" href="forgot_password.php" style="width: 169px;margin: 0px;">Forgot Password</a><button class="btn btn-primary" type="submit" style="width: 73px;margin: 18px;">Login</button></div>
                                 </form>
@@ -61,8 +61,8 @@ pageEncoding="ISO-8859-1"%>
                                         <div class="col-md-6" style="width: 18px;height: 47px;margin: -6px;padding: -102px;"></div>
                                         <div class="col-md-6" style="padding: 13px;">
                                             <div class="form-group" style="height: 85px;">
-                                                <h2 class="text-center" style="width: 563px;height: 39px;">Teacher Login</h2><input class="form-control" type="text" id="roll_no" name="roll_no" placeholder="Enter your Teacher ID"></div>
-                                            <div class="form-group" style="width: 498px;padding: 0px;"><input class="form-control" type="password" id="password" name="password" style="width: 534px;" placeholder="Enter your password">
+                                                <h2 class="text-center" style="width: 563px;height: 39px;">Teacher Login</h2><input class="form-control" type="text" id="roll_no" name="roll_no" placeholder="Enter your Teacher ID" Required></div>
+                                            <div class="form-group" style="width: 498px;padding: 0px;"><input class="form-control" type="password" id="password" name="password" style="width: 534px;" placeholder="Enter your password" Required>
                                                     <a class="btn btn-primary" role="button" href="forgot_password.php" style="width: 143px;margin: 9px;padding: 6px;height: 38px;">Forgot Password</a>
                                                 <button
                                                     class="btn btn-primary" type="submit" style="width: 73px;margin: 9px;padding: 6px;height: 38px;">Login</button>
@@ -88,8 +88,8 @@ pageEncoding="ISO-8859-1"%>
             <div class="row">
                 <div class="col">
                     <form class="bootstrap-form-with-validation" action="signup.jsp">
-                        <div class="form-group"><input class="form-control" type="text" id="roll_no" name="roll_no" style="width: 440px;" placeholder="Enter your Registered Number"></div>
-                        <div class="form-group"><input class="form-control" type="number" id="mobile_number" name="mobile_number" placeholder="Enter your mobile number" style="width: 439px;"></div>
+                        <div class="form-group"><input class="form-control" type="text" id="roll_no" name="roll_no" style="width: 440px;" placeholder="Enter your Registered Number" Required></div>
+                        <div class="form-group"><input class="form-control" type="number" id="mobile_number" name="mobile_number" placeholder="Enter your mobile number" style="width: 439px;" Required></div>
                         <div class="form-group" style="width: 463px;"><button class="btn btn-primary" type="submit" style="width: 137px;">Create Account</button></div>
                     </form>
                 </div>

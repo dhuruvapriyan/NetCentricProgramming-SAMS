@@ -5,10 +5,10 @@
 
 <html>
 <head>
-<title>Class List</title>
+<title>Profile Information</title>
 <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Home - Brand</title>
+    <title>Profile Information</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic">
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
@@ -16,18 +16,18 @@
 </head>
 <body>
 <center>
-<h1>Class List</h1>
+<h1>Profile Information</h1>
 <%
 try {
 
 %>
 <%@include file="connection.jsp"%>
 <%
-
+String s_no = (String)session.getAttribute("s_no");
 Connection connection = null;
 
 Statement statement = null;
-PreparedStatement ps = null;
+
 ResultSet rs = null;
 
 Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -35,10 +35,9 @@ Class.forName("com.mysql.jdbc.Driver").newInstance();
 connection = DriverManager.getConnection(url, dbusername,dbpassword);
 
 statement = connection.createStatement();
-String t_no = (String)session.getAttribute("t_no");
-String QueryString = "SELECT * from class_teacher join course on class_teacher.c_no = course.c_no and t_no = ?;";
-ps = connection.prepareStatement(QueryString);
-ps.setString(1,t_no);
+String QueryString = "SELECT * from student_details where s_no = ?;";
+PreparedStatement ps = connection.prepareStatement(QueryString);
+ps.setString(1,s_no);
 rs = ps.executeQuery();
 %>
  <div class="container text-center">
@@ -47,23 +46,21 @@ rs = ps.executeQuery();
                     
                     <div class="table-responsive">
                         <table class="table">
-<TR bgcolor = "#ffcc5c"><TH>Course Code</TH><TH>Course Name</TH><TH>Class</TH><TH>Attendance</TH><TR>
 <%
-while(rs.next()) {
+while (rs.next()) {
 %>
-<TR>
-<TD><%=rs.getString("course.c_no")%></TD>
-<TD><%=rs.getString("course.c_name")%></TD>
-<TD><%=rs.getString("class_teacher.class")%></TD>
-<td><a class="btn btn-light btn-x3 js-scroll-trigger" role="button" href = "mark_attendance.jsp?courses=<%=rs.getString("course.c_no")%>&classes=<%=rs.getString("class_teacher.class")%>">Mark Attendance</a></td>
-</TR>
-<% } %>
+<TR><TD bgcolor = "#ffcc5c">Student Roll Number </TD><TD><%=rs.getString("s_no")%></TD></TR>
+<TR><TD bgcolor = "#ffcc5c">Student Name </TD><TD><%=rs.getString("s_name")%></TD></TR>
+<TR><TD bgcolor = "#ffcc5c">Gender </TD><TD><%=rs.getString("gender")%></TD></TR>
+<TR><TD bgcolor = "#ffcc5c">HomeTown </TD><TD><%=rs.getString("city")%>, <%=rs.getString("state")%></TD></TR>
+<TR><TD bgcolor = "#ffcc5c">CGPA </TD><TD><%=rs.getFloat("cgpa")%></TD></TR>
+<TR><TD bgcolor = "#ffcc5c">Disciplinary Action Count </TD><TD><%=rs.getFloat("disciplinary_count")%></TD></TR>
 <%
+}
 rs.close();
 statement.close();
 connection.close();
 } catch (Exception ex) {
-	out.println(ex);
 %>
 <font size="+3" color="red"></b>
 <%
@@ -72,10 +69,8 @@ out.println("No books added.");
 %>
 </font>
 </TABLE>
-
-
-
-<p class="lead mb-5"><span>Click  &nbsp;</span><a href="/sams3/teacher_home.jsp">here</a> to go back.</p>
+<p class="lead mb-5"><span>Click  &nbsp;</span><a href="/sams3/student_home.jsp">here</a> to go back.</p>
+<br>
 </center>
 </body>
 </html>

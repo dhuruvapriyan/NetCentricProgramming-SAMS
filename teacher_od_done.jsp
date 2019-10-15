@@ -2,7 +2,17 @@
 <%@page import="java.sql.*"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page import="java.util.Date,java.io.*,java.util.Enumeration"%>
-<html><body>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Home - Brand</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
+<title>Confirmation</title>
+</head><body>
 <center>
 <%
 String[] attendees = request.getParameterValues("odees"); 
@@ -14,9 +24,12 @@ ResultSet rs2 = null;
 try
 	{
 	    
-        String myUrl = "jdbc:mysql://localhost:3306/sams";
+        %>
+<%@include file="connection.jsp"%>
+<%
       Class.forName("com.mysql.jdbc.Driver").newInstance();
-        Connection conn = DriverManager.getConnection(myUrl, "root", "");
+	  
+        Connection conn = DriverManager.getConnection(url, dbusername,dbpassword);
 		for(int i = 0;i<attendees.length;i++)
 		{
 			String od_id = attendees[i];
@@ -49,6 +62,14 @@ try
 			ps3.setInt(1,Integer.valueOf(od_id.substring(0,od_id.length()-1)));
 			System.out.println(ps3);
 			ps3.execute(); 
+			
+			PreparedStatement ps4 = conn.prepareStatement("UPDATE course_registration SET classes_attended = classes_attended + ? where s_no = ? and c_no = ?;");
+			ps4.setInt(1,to_hr-from_hr+1);
+			ps4.setString(2,s_no);
+			ps4.setString(3,c_no);
+			ps4.execute();
+			
+			
 					}
 			}
 			catch(Exception e1)
@@ -63,10 +84,11 @@ try
 		System.out.println(e1);
 	}
 %>
-<p> OD successfully updated. </p>
-<form action = "teacher_home.jsp">
-<input type="hidden" name="items"/>
-<input type='submit' value = "Go back to Home page."/>
+
+<script LANGUAGE='JavaScript'>
+     window.alert('OD successfully updated.');
+     window.location.href='/sams3/teacher_home.jsp';
+    </script>
 </form>
 </center>
 </body>

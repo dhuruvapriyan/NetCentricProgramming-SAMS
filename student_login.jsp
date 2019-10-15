@@ -16,7 +16,9 @@ PreparedStatement ps = null;
 ResultSet rs = null;
 
 String driverName = "com.mysql.jdbc.Driver";
-String url = "jdbc:mysql://localhost:3306/sams";
+%>
+<%@include file="connection.jsp"%>
+<%
 String user = "root";
 String dbpsw = "";
 
@@ -29,7 +31,7 @@ if((!(userid.equals(null) || userid.equals("")) && !(password.equals(null) || pa
 {
 try{
 Class.forName(driverName);
-con = DriverManager.getConnection(url, user, dbpsw);
+con = DriverManager.getConnection(url, dbusername,dbpassword);
 ps = con.prepareStatement(sql);
 ps.setString(1, userid);
 ps.setString(2, password);
@@ -40,12 +42,20 @@ userdbName = rs.getString("s_no");
 userdbPsw = rs.getString("password");
 if(userid.equals(userdbName) && password.equals(userdbPsw))
 {
-session.setAttribute("user",userdbName); 
+session.setAttribute("s_no",userdbName); 
 response.sendRedirect("student_home.jsp"); 
 } 
 }
 else
-response.sendRedirect("index.jsp");
+{
+%>	
+<script LANGUAGE='JavaScript'>
+     window.alert('Incorrect credentials');
+     window.location.href='index.jsp#about';
+    </script>"	
+<%	
+
+}
 rs.close();
 ps.close(); 
 }
@@ -59,7 +69,7 @@ else
 %>
 <center><p style="color:red">Missing fields, Please try again.</p></center>
 <% 
-getServletContext().getRequestDispatcher("/home.jsp").include(request, response);
+getServletContext().getRequestDispatcher("/index.jsp").include(request, response);
 }
 %>
 </body>
