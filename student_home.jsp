@@ -4,9 +4,11 @@ pageEncoding="ISO-8859-1"%>
 <% if(session.getAttribute("s_no")==null)
 	{response.sendRedirect("index.jsp");}
 %>
-<html>
+<!DOCTYPE html>
+<html lang="es">
 
 <head>
+	<title>my</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Home - Brand</title>
@@ -24,7 +26,7 @@ pageEncoding="ISO-8859-1"%>
 
 </head>
 
-<body id="page-top"><a class="menu-toggle rounded" href="#"><i class="fa fa-bars"></i></a>
+<body id="page-top"><a class="menu-toggle rounded" href="#"><em class="fa fa-bars"></em></a>
     <nav class="navbar navbar-light navbar-expand" id="sidebar-wrapper">
         <div class="container"><button data-toggle="collapse" class="navbar-toggler d-none" data-target="#"></button>
             <div class="collapse navbar-collapse">
@@ -111,7 +113,7 @@ while(rs.next())
 					<div class="col-lg-3 loader_col">
 						<!-- Loader -->
 						<div class="loader" data-perc="<%=percentage%>"></div>
-						<div class="loader_sub text-center"> <b><%=c_no%></b><br><%=rs2.getString("course.c_name")%> </div>
+						<div class="loader_sub text-center"> <strong><%=c_no%></strong><br><%=rs2.getString("course.c_name")%> </div>
 					</div>
 					
 					<% 
@@ -122,7 +124,7 @@ while(rs.next())
 					<div class="col-lg-3 loader_col">
 						<!-- Loader -->
 						<div class="loader" data-perc="1.0"></div>
-						<div class="loader_sub text-center"> <b><%=c_no%></b><br><%=rs2.getString("course.c_name")%> </div>
+						<div class="loader_sub text-center"> <strong><%=c_no%></strong><br><%=rs2.getString("course.c_name")%> </div>
 					</div>
 					<%
 					}
@@ -130,9 +132,9 @@ while(rs.next())
 					} %>
 
 				</div>
-				<center>
+				
 				<h3 class="mb-5"></h3><a class="btn btn-primary btn-xl js-scroll-trigger" role="button" href="my_attendance.jsp">View Detailed Report</a>
-            </center>
+          
 </div>
 			
 		</div>
@@ -201,12 +203,12 @@ while(rs.next())
     <footer class="footer text-center">
         <div class="container">
             <ul class="list-inline mb-3">
-                <li class="list-inline-item">&nbsp;<a class="text-white social-link rounded-circle" href="#"><i class="icon-social-facebook"></i></a></li>
-                <li class="list-inline-item">&nbsp;<a class="text-white social-link rounded-circle" href="#"><i class="icon-social-twitter"></i></a></li>
-                <li class="list-inline-item">&nbsp;<a class="text-white social-link rounded-circle" href="#"><i class="icon-social-github"></i></a></li>
+                <li class="list-inline-item">&nbsp;<a class="text-white social-link rounded-circle" href="#"><em class="icon-social-facebook"></em></a></li>
+                <li class="list-inline-item">&nbsp;<a class="text-white social-link rounded-circle" href="#"><em class="icon-social-twitter"></em></a></li>
+                <li class="list-inline-item">&nbsp;<a class="text-white social-link rounded-circle" href="#"><em class="icon-social-github"></em></a></li>
             </ul>
             <p class="text-muted mb-0 small">Copyright &nbsp;© SAMS 2019</p>
-        </div><a class="js-scroll-trigger scroll-to-top rounded" href="#page-top"><i class="fa fa-angle-up"></i></a></footer>
+        </div><a class="js-scroll-trigger scroll-to-top rounded" href="#page-top"><em class="fa fa-angle-up"></em></a></footer>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
