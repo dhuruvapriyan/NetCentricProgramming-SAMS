@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 
 <head>
     <meta charset="utf-8">
@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
 </head>
 
-<body id="page-top"><a class="menu-toggle rounded" href="#"><i class="fa fa-bars"></i></a>
+<body id="page-top"><a class="menu-toggle rounded" href="#"><em class="fa fa-bars"></em></a>
     <nav class="navbar navbar-light navbar-expand" id="sidebar-wrapper">
         <div class="container"><button data-toggle="collapse" class="navbar-toggler d-none" data-target="#"></button>
             <div class="collapse navbar-collapse">
@@ -52,12 +52,12 @@
     <footer class="footer text-center">
         <div class="container">
             <ul class="list-inline mb-5">
-                <li class="list-inline-item">&nbsp;<a class="text-white social-link rounded-circle" href="#"><i class="icon-social-facebook"></i></a></li>
-                <li class="list-inline-item">&nbsp;<a class="text-white social-link rounded-circle" href="#"><i class="icon-social-twitter"></i></a></li>
-                <li class="list-inline-item">&nbsp;<a class="text-white social-link rounded-circle" href="#"><i class="icon-social-github"></i></a></li>
+                <li class="list-inline-item">&nbsp;<a class="text-white social-link rounded-circle" href="#"><em class="icon-social-facebook"></em></a></li>
+                <li class="list-inline-item">&nbsp;<a class="text-white social-link rounded-circle" href="#"><em class="icon-social-twitter"></em></a></li>
+                <li class="list-inline-item">&nbsp;<a class="text-white social-link rounded-circle" href="#"><em class="icon-social-github"></em></a></li>
             </ul>
             <p class="text-muted mb-0 small">Copyright &nbsp;© SAMS 2019</p>
-        </div><a class="js-scroll-trigger scroll-to-top rounded" href="#page-top"><i class="fa fa-angle-up"></i></a></footer>
+        </div><a class="js-scroll-trigger scroll-to-top rounded" href="#page-top"><em class="fa fa-angle-up"></em></a></footer>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
